@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arlu - Contact</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <img src="logo.png" alt="Logo Arlu" />
+  </a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="models.html">Modèles</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="contact" aria-label="Formulaire de contact">
+    <h2>Contactez-nous</h2>
+    <form id="contactForm" action="https://formspree.io/f/xyzpezng" method="POST" novalidate>
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" placeholder="Votre nom complet" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="exemple@domaine.com" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" placeholder="Votre message ici..." required></textarea>
+
+      <div style="margin-bottom: 20px;">
+        <input type="checkbox" id="robot" name="robot" required />
+        <label for="robot">Je ne suis pas un robot</label>  
+      </div>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  const form = document.getElementById('contactForm');
+
+  form.addEventListener('submit', function (e) {
+    const nom = document.getElementById('nom').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const robotChecked = document.getElementById('robot').checked;
+
+    if (!nom || !email || !message || !robotChecked) {
+      e.preventDefault();
+      showPopup('popup-error');
+      return;
+    }
+
+    // On laisse Formspree gérer la soumission, on affiche popup success au retour
+    // Mais Formspree redirige normalement, donc on peut gérer ici un feedback léger
+    // Pour demo, on affiche popup success et nouveau modèle après 3 secondes
+    e.preventDefault(); // Bloquer le submit pour simuler l'envoi (en vrai, enlève si tu veux submit)
+
+    showPopup('popup-success');
+
+    setTimeout(() => {
+      closePopup('popup-success');
+      showPopup('popup-new-model');
+    }, 3000);
+  });
+
+  function showPopup(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+</script>
+
+<!-- Popup succès -->
+<div id="popup-success" class="popup-overlay" role="alert" aria-live="assertive" style="display:none;">
+  <div class="popup-box">
+    <p>✅ Merci ! Votre message a bien été envoyé.</p>
+    <button onclick="closePopup('popup-success')">Fermer</button>
+  </div>
+</div>
+
+<!-- Popup erreur -->
+<div id="popup-error" class="popup-overlay" role="alert" aria-live="assertive" style="display:none;">
+  <div class="popup-box">
+    <p>❌ Veuillez remplir tous les champs et confirmer que vous n'êtes pas un robot.</p>
+    <button onclick="closePopup('popup-error')">Fermer</button>
+  </div>
+</div>
+
+<!-- Popup nouveau modèle -->
+<div id="popup-new-model" class="popup-overlay" role="alert" aria-live="polite" style="display:none;">
+  <div class="popup-box">
+    <p>🚗 Découvrez notre tout nouveau modèle exclusif !</p>
+    <a href="models.html">
+      <button>Voir notre nouveau modèle</button>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
