@@ -48,27 +48,25 @@
   const form = document.getElementById('contactForm');
 
   form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Empêche l'envoi immédiat
+
     const nom = document.getElementById('nom').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
     const robotChecked = document.getElementById('robot').checked;
 
     if (!nom || !email || !message || !robotChecked) {
-      e.preventDefault();
       showPopup('popup-error');
       return;
     }
 
-    // On laisse Formspree gérer la soumission, on affiche popup success au retour
-    // Mais Formspree redirige normalement, donc on peut gérer ici un feedback léger
-    // Pour demo, on affiche popup success et nouveau modèle après 3 secondes
-
+    // Affiche le popup de succès avec redirection dans 5 secondes
     showPopup('popup-success');
 
     setTimeout(() => {
-      closePopup('popup-success');
-      showPopup('popup-new-model');
-    }, 3000);
+      // Envoie réel du formulaire après 5 secondes
+      form.submit();
+    }, 5000);
   });
 
   function showPopup(id) {
@@ -83,7 +81,7 @@
 <!-- Popup succès -->
 <div id="popup-success" class="popup-overlay" role="alert" aria-live="assertive" style="display:none;">
   <div class="popup-box">
-    <p>✅ Merci ! Votre message a bien été envoyé.</p>
+    <p>✅ Merci ! Votre message a bien été envoyé.<br>Redirection dans 5 secondes, une fois redirigé, revenez vers le site ARLU.</p>
     <button onclick="closePopup('popup-success')">Fermer</button>
   </div>
 </div>
@@ -95,5 +93,6 @@
     <button onclick="closePopup('popup-error')">Fermer</button>
   </div>
 </div>
+
 </body>
 </html>
