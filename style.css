@@ -363,7 +363,7 @@ textarea {
 /* ===== Mobile-only Styles (max-width: 768px) ===== */
 @media only screen and (max-width: 768px) {
   body {
-    font-size: 16px;
+    font-size: 13px;
     padding: 10px;
     background: #ffffff;
   }
