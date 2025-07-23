@@ -62,7 +62,6 @@
     // On laisse Formspree gérer la soumission, on affiche popup success au retour
     // Mais Formspree redirige normalement, donc on peut gérer ici un feedback léger
     // Pour demo, on affiche popup success et nouveau modèle après 3 secondes
-    e.preventDefault(); // Bloquer le submit pour simuler l'envoi (en vrai, enlève si tu veux submit)
 
     showPopup('popup-success');
 
@@ -96,16 +95,5 @@
     <button onclick="closePopup('popup-error')">Fermer</button>
   </div>
 </div>
-
-<!-- Popup nouveau modèle -->
-<div id="popup-new-model" class="popup-overlay" role="alert" aria-live="polite" style="display:none;">
-  <div class="popup-box">
-    <p>🚗 Découvrez notre tout nouveau modèle exclusif !</p>
-    <a href="models.html">
-      <button>Voir notre nouveau modèle</button>
-    </a>
-  </div>
-</div>
-
 </body>
 </html>
