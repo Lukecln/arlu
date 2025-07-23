@@ -322,3 +322,34 @@ button[type="submit"]:active,
     font-size: 0.9rem;
   }
 }
+.filters {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.filters button {
+  background: #ddd;
+  border: none;
+  padding: 12px 24px;
+  margin: 5px 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filters button:hover {
+  background-color: #f39c12;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(243, 156, 18, 0.7);
+}
+
+.filters button.active,
+.filters button[aria-pressed="true"] {
+  background-color: #f39c12;
+  color: white;
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.8);
+}
