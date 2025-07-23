@@ -354,3 +354,9 @@ button[type="submit"]:active,
   color: white;
   box-shadow: 0 6px 20px rgba(243, 156, 18, 0.8);
 }
+textarea {
+  min-height: 180px;
+  height: auto;
+  width: 100%;
+  resize: vertical; /* autorise l'utilisateur à l'agrandir */
+}
