@@ -361,24 +361,32 @@ textarea {
   resize: vertical; /* autorise l'utilisateur à l'agrandir */
 }
 /* ===== Mobile-only Styles (max-width: 768px) ===== */
+/* ===== Mobile-only Styles (max-width: 768px) ===== */
 @media only screen and (max-width: 768px) {
   body {
-    font-size: 13px;
+    font-size: 16px;
     padding: 10px;
     background: #ffffff;
   }
 
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row; /* on garde en ligne */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   nav ul {
-    flex-direction: column;
-    gap: 10px;
-    margin-left: 0;
-    margin-top: 10px;
-    width: 100%;
+    flex-direction: row; /* reste en ligne */
+    gap: 12px;
+    margin-left: auto;
+    flex-wrap: wrap;
+    padding-top: 8px;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    padding: 6px 10px;
   }
 
   .model-grid {
@@ -433,3 +441,4 @@ textarea {
     border-radius: 8px;
   }
 }
+
