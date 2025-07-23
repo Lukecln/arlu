@@ -24,15 +24,21 @@
 <main>
   <h2>Nos modèles</h2>
 
-  <div class="filters" role="group" aria-label="Filtrer les modèles par catégorie">
+  <div class="filters category-filters" role="group" aria-label="Filtrer les modèles par catégorie">
     <button data-category="all" class="active" aria-pressed="true">Tous</button>
     <button data-category="sport" aria-pressed="false">Sport</button>
     <button data-category="suv" aria-pressed="false">SUV</button>
     <button data-category="Berline" aria-pressed="false">Berline</button>
     <button data-category="Citadine" aria-pressed="false">Citadine</button>
-
   </div>
-
+  
+  <div class="filters brand-filters" role="group" aria-label="Filtrer les modèles par marque">
+    <button data-brand="all" class="active" aria-pressed="true">Toutes les marques</button>
+    <button data-brand="Audi" aria-pressed="false">Audi</button>
+    <button data-brand="Bentley" aria-pressed="false">Bentley</button>
+    <button data-brand="Mercedes" aria-pressed="false">Mercedes</button>
+    <button data-brand="Porsche" aria-pressed="false">Porsche</button>
+  </div>
   <div class="model-grid" id="modelGrid">
     <a href="modeles/audi_r8.html" class="model-card" data-category="sport">
       <img src="car_pics/audi_r8.png" alt="Audi R8 Arlu" />
@@ -73,26 +79,58 @@
 </main>
 
 <script>
-  function filterModels(category) {
-    const buttons = document.querySelectorAll('.filters button');
-    buttons.forEach(btn => {
-      const isActive = btn.dataset.category === category;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive);
-    });
+  // Variables pour stocker les filtres sélectionnés
+  let currentCategory = 'all';
+  let currentBrand = 'all';
 
+  // Applique les deux filtres combinés
+  function applyFilters() {
     const cards = document.querySelectorAll('.model-card');
     cards.forEach(card => {
-      card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+      const matchCategory = (currentCategory === 'all' || card.dataset.category.toLowerCase() === currentCategory.toLowerCase());
+      const matchBrand = (currentBrand === 'all' || card.dataset.brand.toLowerCase() === currentBrand.toLowerCase());
+      card.style.display = (matchCategory && matchBrand) ? 'block' : 'none';
     });
   }
 
-  document.querySelectorAll('.filters button').forEach(button => {
+  // Gestion filtres catégorie
+  const categoryButtons = document.querySelectorAll('.category-filters button');
+  categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
-      filterModels(button.dataset.category);
+      // Met à jour la sélection catégorie
+      currentCategory = button.dataset.category;
+
+      // Met à jour classes active et aria-pressed dans ce groupe
+      categoryButtons.forEach(btn => {
+        const isActive = btn === button;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+
+      applyFilters();
     });
   });
-</script>
 
+  // Gestion filtres marque
+  const brandButtons = document.querySelectorAll('.brand-filters button');
+  brandButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Met à jour la sélection marque
+      currentBrand = button.dataset.brand;
+
+      // Met à jour classes active et aria-pressed dans ce groupe
+      brandButtons.forEach(btn => {
+        const isActive = btn === button;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+
+      applyFilters();
+    });
+  });
+
+  // Applique le filtre initial au chargement
+  applyFilters();
+</script>
 </body>
 </html>
